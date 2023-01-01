@@ -1,10 +1,11 @@
 const express = require("express")
-const router = express.Router()
+
 /** 
 *  @param {express} app
 */
+
 function init(app){
-    app.use("/", require("./ex-router"))
+    app.use("/posts", require("./posts.js"))
 }
 
 module.exports = init
