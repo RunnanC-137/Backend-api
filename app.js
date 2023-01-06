@@ -16,5 +16,5 @@ app.listen(PORT, err => {
     err
     ? console.log(err)
     : null
-    console.log("servidor rodando na porta 3000 http://localhost:3000")
+    console.log("servidor rodando no dominio http://localhost:3000")
 })

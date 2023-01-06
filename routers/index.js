@@ -5,7 +5,7 @@ const express = require("express")
 */
 
 function init(app){
-    app.use("/posts", require("./posts.js"))
+    app.use("/posts", require("./post.js"))
 }
 
 module.exports = init
