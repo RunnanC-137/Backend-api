@@ -4,6 +4,9 @@ const PORT = 3000 //;
 const app = express()
 const cors = require("cors")
 
+app.set("view engine", "ejs")
+app.set("views", path.join(__dirname, "templates"))
+
 app.use( cors({
     origin: [ 
         "http://localhost:3000", 
@@ -12,7 +15,8 @@ app.use( cors({
     ]
 }))
 app.use(express.json()) //para ler requestes 
-app.use(express.urlencoded({ extended: false })) //para ler requestes
+app.use(express.urlencoded({ extended: true })) //para ler requestes
+
 require("./model").init() //o batabase
 require("./routers").init(app) //as roters
 

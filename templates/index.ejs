@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include("./bootstrap/head.ejs") %> 
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="ms-5 mt-4">Adicione uma URL</h1>
+    <form class="ms-3 mt-4" action="new" method="post">
+        <input class="field" type="text" name="title" placeholder="title" required>
+        <input class="field" type="text" name="url" placeholder="url" required>
+        <button class="btn btn-info btn-sm" type="submit">Submit</button>
+    </form>
+
+    <div class="posts">
+        <% for (let post of posts) {%>
+
+        <%} %>
+    </div>
+    <%- include("./bootstrap/body.ejs") %> 
+</body>
+</html>
