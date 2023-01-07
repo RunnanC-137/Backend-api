@@ -1,11 +1,15 @@
 const express = require("express")
 
 /** 
+* nao sei a finalidade disso
 *  @param {express} app
+* ????????????????????????????
 */
 
-function init(app){
-    app.use("/posts", require("./post.js"))
-}
+module.exports = {
+    Router: express.Router,
 
-module.exports = init
+    init:(app) => {
+        app.use("/link", require("./link.js"))
+    }
+}
