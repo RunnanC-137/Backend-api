@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include("./bootstrap/head.ejs") %> 
+    <title>Document</title>
+</head>
+<body>
+    <% if (error) {%>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>[ ERRO AO ATUALIZAR O LINK ]: ESSE TITULO [<%= body.title %> ] JÁ ESTÁ EM USO</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } %>
+
+    <form class="container mt-3" style="max-width: 600px;" action="/link?_method=PUT" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">
+                NEW TITLE
+            </label>
+            <input type="text" class="form-control" id="title" aria-describedby="titleHelp" name="title" value="<%= body.title %>" required>
+            <div id="titleHelp" class="form-text">
+                Vc usarar esse titulo para acessar esse site
+            </div>
+        </div>
+
+        <input name="old_title" value="<%= body.title %>" hidden>
+        <input name="id" value="<%= id %>" hidden>
+
+        <div class="mb-3">
+            <label for="url" class="form-label">
+                NEW URL
+            </label>
+            <input type="text" class="form-control" id="url" name="url" value="<%= body.url %>" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">ATUALIZAR</button>
+    </form>
+
+
+    <%- include("./bootstrap/body.ejs") %> 
+</body>
+</html>

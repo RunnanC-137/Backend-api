@@ -3,10 +3,14 @@ const path = require("path")
 const PORT = 3000 //;
 const app = express()
 const cors = require("cors")
+const methodOverride = require("method-override")
+
 
 app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "templates"))
 
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'))
 app.use( cors({
     origin: [ 
         "http://localhost:3000", 

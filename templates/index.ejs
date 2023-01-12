@@ -4,22 +4,69 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%- include("./bootstrap/head.ejs") %> 
+    <%- include("./bootstrap/head.ejs") %>
+    
     <title>Document</title>
+    
 </head>
 <body>
-    <h1 class="ms-5 mt-4">Adicione uma URL</h1>
-    <form class="ms-3 mt-4" action="new" method="post">
-        <input class="field" type="text" name="title" placeholder="title" required>
-        <input class="field" type="text" name="url" placeholder="url" required>
-        <button class="btn btn-info btn-sm" type="submit">Submit</button>
-    </form>
-
-    <div class="posts">
-        <% for (let post of posts) {%>
-
-        <%} %>
+    <div class="container d-flex flex-column" style="max-width: 300px;">
+        <div class="posts mt-3">
+            <% for (let link of links) {%>
+                <div class="card mb-4" id="<%= link.id %>" >
+                    <div class="card-header d-flex justify-content-between">
+                        <h5 class="card-title">
+                            <%= link.title %> 
+                        </h5>
+                        <div class="text-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+                                <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"></path>
+                            </svg>
+                            <%= link.clicks %> 
+                        </div>
+                        <form action="link/update/<%= link.id %>?title=<%= link.title %>&url=<%= link.url %> "  method="post">
+                            <button type="submit" class="btn btn-outline-primary">EDITAR</button>
+                        </form>
+                        
+                    </div>
+                    <div class="card-body d-flex justify-content-between">
+                        <a class="btn btn-success" href="/link/<%= link.title %>">
+                            GO LINK
+                        </a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#<%= link.title %>">
+                            DELETE
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="<%= link.title %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    Deletar <%= link.title %>
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Voce ira deletar o link de <%= link.title %>. <br><strong>Essa ação não é inreversivel</strong>
+                            </div>
+                            <div class="modal-footer">
+                                <form action="link/<%= link.id %>?_method=DELETE " method="post">
+                                    <button data-bs-dismiss="modal" class="btn btn-outline-danger btn-sm" type="submit">DELETE</button>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <%} %>
+        </div>
+        <a href="link/new" class="btn btn-info text-light">ADICIONAR LINK</a> 
     </div>
+    
     <%- include("./bootstrap/body.ejs") %> 
 </body>
 </html>
